@@ -2,11 +2,13 @@ import itertools
 import os
 from cosmoHammer import getLogger
 import time
+import dill
 
 # If mpi4py is installed, import it.
 try:
     from mpi4py import MPI
     MPI = MPI
+    MPI.pickle.__init__(dill.dumps, dill.loads)
 except ImportError:
     MPI = None
 

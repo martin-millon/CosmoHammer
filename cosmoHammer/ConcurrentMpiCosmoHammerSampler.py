@@ -1,5 +1,5 @@
 
-import multiprocessing
+import multiprocess
 from cosmoHammer.MpiCosmoHammerSampler import MpiCosmoHammerSampler
 
 
@@ -10,7 +10,7 @@ class ConcurrentMpiCosmoHammerSampler(MpiCosmoHammerSampler):
 
     :param threads:  (optional)
         The number of threads to use for parallelization. If ``threads == 1``,
-        then the ``multiprocessing`` module is not used but if
+        then the ``multiprocess`` module is not used but if
         ``threads > 1``, then a ``Pool`` object is created
         
     :param kwargs: key word arguments passed to the CosmoHammerSampler
@@ -29,7 +29,7 @@ class ConcurrentMpiCosmoHammerSampler(MpiCosmoHammerSampler):
         
     def _getMapFunction(self):
         if self.threads > 1:
-            pool = multiprocessing.Pool(self.threads)
+            pool = multiprocess.Pool(self.threads)
             return pool.map
         else:
             return map

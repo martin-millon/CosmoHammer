@@ -14,7 +14,7 @@ class BestFitPositionGenerator(object):
     A position generator which uses a particle swarm optimization algorithm 
     to find the best fit value and the collapsed swarm to estimate the curvature matrix
     at that point. The optimization process can be parallelized over
-    MPI and python multiprocessing.
+    MPI and python multiprocess.
     
     :param mpi: True if a MPI implementation of the PSO should be used. Default is False 
     :param threads: Number of multiprocessing thread that should be started. Default is 1

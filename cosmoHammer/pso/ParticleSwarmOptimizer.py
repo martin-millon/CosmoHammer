@@ -7,7 +7,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from copy import copy
 from math import floor
 import math
-import multiprocessing
+import multiprocess
 import numpy
 
 class ParticleSwarmOptimizer(object):
@@ -24,7 +24,7 @@ class ParticleSwarmOptimizer(object):
     :param particleCount: the number of particles to use. 
     :param threads: (optional)
         The number of threads to use for parallelization. If ``threads == 1``,
-        then the ``multiprocessing`` module is not used but if
+        then the ``multiprocess`` module is not used but if
         ``threads > 1``, then a ``Pool`` object is created and calls to
         ``lnpostfn`` are run in parallel.
 
@@ -50,7 +50,7 @@ class ParticleSwarmOptimizer(object):
         self.pool = pool
         
         if self.threads > 1 and self.pool is None:
-            self.pool = multiprocessing.Pool(self.threads)
+            self.pool = multiprocess.Pool(self.threads)
         
         self.paramCount = len(self.low)
         
@@ -145,7 +145,7 @@ class ParticleSwarmOptimizer(object):
     def _get_fitness(self,swarm):
         
         # If the `pool` property of the pso has been set (i.e. we want
-        # to use `multiprocessing`), use the `pool`'s map method. Otherwise,
+        # to use `multiprocess`), use the `pool`'s map method. Otherwise,
         # just use the built-in `map` function.
         if self.pool is not None:
             mapFunction = self.pool.map

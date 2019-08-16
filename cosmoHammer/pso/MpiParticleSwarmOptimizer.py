@@ -6,7 +6,7 @@ Created on Oct 28, 2013
 from __future__ import print_function, division, absolute_import, \
     unicode_literals
     
-import multiprocessing
+import multiprocess
 import numpy
 
 from cosmoHammer.util.MpiUtil import MpiPool, mpiBCast
@@ -27,7 +27,7 @@ class MpiParticleSwarmOptimizer(ParticleSwarmOptimizer):
         
     def _getMapFunction(self):
         if self.threads > 1:
-            pool = multiprocessing.Pool(self.threads)
+            pool = multiprocess.Pool(self.threads)
             return pool.map
         else:
             return map

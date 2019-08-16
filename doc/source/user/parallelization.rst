@@ -9,7 +9,7 @@ Parallelization
 
 ``CosmoHammer`` allows for parallelizing the evaluation of the likelihood from a single computer to a large scale computing environment like a compute cluster or a cloud infrastructure. 
 
-In the simple case where ``CosmoHammer`` is executed on a single physical computer with one or multiple threads the parallelization is either solved thru `OpenMP <http://openmp.org>`_ or the built in Python `multiprocessing <http://docs.python.org/library/multiprocessing.html>`_. In the case of OpenMP the parallelization is done by executing multiple threads within a shared-memory machine. This is typically a use case when your likelihood code is written in C/C++ or FORTRAN like the theory prediction module `CAMB <http://camb.info/>`_.
+In the simple case where ``CosmoHammer`` is executed on a single physical computer with one or multiple threads the parallelization is either solved thru `OpenMP <http://openmp.org>`_ or the Python package ``multiprocess``. In the case of OpenMP the parallelization is done by executing multiple threads within a shared-memory machine. This is typically a use case when your likelihood code is written in C/C++ or FORTRAN like the theory prediction module `CAMB <http://camb.info/>`_.
 
 With multiprocessing it is important to note that the module spawns a certain number of Python processes within a machine in order to execute the code in parallel. This causes some overhead during the parallelization process so that a performance gain is only achieved if the computations are resource demanding.
 
@@ -23,7 +23,7 @@ Examples
 
 *Parallelization of* ``CosmoHammer`` *on a* **single machine** *with n cores.*
 
-1) Using only Python multiprocessing:
+1) Using only Python multiprocess:
 :: 
     from cosmoHammer.CosmoHammerSampler import CosmoHammerSampler
     sampler = CosmoHammerSampler(params, likelihoodComputationChain, filePrefix, 
@@ -37,7 +37,7 @@ Examples
     sampler = CosmoHammerSampler(params, likelihoodComputationChain, filePrefix, 
         walkersRatio, burninIterations, sampleIterations)
 
-3) Using OpenMP and Python multiprocessing (choose the the number m of OpenMP threads and the number k of multiprocessing threads such that k*m = n):
+3) Using OpenMP and Python multiprocess (choose the the number m of OpenMP threads and the number k of multiprocessing threads such that k*m = n):
 
 ``$ export OMP_NUM_THREADS=m``
 :: 
@@ -67,7 +67,7 @@ Examples
     sampler = MpiCosmoHammerSampler(params, likelihoodComputationChain, filePrefix, 
         walkersRatio, burninIterations, sampleIterations)
 
-3) Using MPI, OpenMP, and Python multiprocessing. Choose the number m of OpenMP threads and the number k of multiprocessing threads such that n=k*m. Choose $NUM=N when executing the python script
+3) Using MPI, OpenMP, and Python multiprocess. Choose the number m of OpenMP threads and the number k of multiprocessing threads such that n=k*m. Choose $NUM=N when executing the python script
 
 ``$ export OMP_NUM_THREADS=m``
 :: 

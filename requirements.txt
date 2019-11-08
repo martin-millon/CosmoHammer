@@ -2,3 +2,4 @@ emcee
 numpy
 mock
 pytest
+dill
